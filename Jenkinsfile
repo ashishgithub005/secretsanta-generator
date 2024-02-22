@@ -1,10 +1,13 @@
 pipeline {
     agent any
+    #this tools required to run mvn, jdk, sonarqube etc
     tools{
         jdk 'jdk17'
         maven 'maven3'
     }
     environment{
+	#sonar-scan we will get from jenkins tool where we have setup configuration for sonarqube
+	# goto http://localhost:8080/manage/configureTools/ then search SonarQube Scanner installations from here you need to take name of SonarQube Scanner. 
         SCANNER_HOME= tool 'sonar-scanner'
     }
 
@@ -37,6 +40,8 @@ pipeline {
 
         stage('Sonar Analysis') {
             steps {
+	       #here you can not pass anything, you need to copy sonarqube server name which we have configured.
+	       # goto http://localhost:8080/manage/configurethen search 'SonarQube servers' and then take SonarQube installations name.
                withSonarQubeEnv('sonar'){
                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Santa \
                    -Dsonar.java.binaries=. \
