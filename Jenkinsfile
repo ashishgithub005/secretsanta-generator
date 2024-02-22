@@ -29,8 +29,8 @@ pipeline {
                sh "mvn test"
             }
         }
-        
-		stage('OWASP Dependency Check') {
+        #for this first you need to install OWASP Dependency Check plugins
+	stage('OWASP Dependency Check') {
             steps {
                dependencyCheck additionalArguments: ' --scan ./ ', odcInstallation: 'DC'
                     dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
