@@ -1,6 +1,7 @@
 pipeline {
     agent any
     #this tools required to run mvn, jdk, sonarqube etc
+    #http://localhost:8080/manage/configureTools/ jdk17, maven3 you will get from here
     tools{
         jdk 'jdk17'
         maven 'maven3'
